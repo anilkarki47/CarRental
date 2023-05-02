@@ -1,0 +1,109 @@
+﻿
+.anchor-size {
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    width: 2em;
+    height: 2em;
+    border: none;
+    background-color: transparent;
+    padding: 0;
+}
+
+    .anchor-size:hover {
+        background-color: rgba(0, 0, 0, 0.1);
+        border-radius: 50%;
+        cursor: pointer;
+    }
+.sidebar-anchor{
+    text-decoration: none;
+}
+.hide {
+    display: none;
+}
+.setting-heading {
+    border-bottom: 3px solid #004f83;
+    text-align: center;
+}
+
+.setting-pointer {
+    cursor: pointer;
+}
+.dataTables_wrapper {
+    margin: 10px 10px 10px 10px;
+}
+
+
+.dropdown {
+    position: relative;
+    display: inline-block;
+}
+
+.dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: white;
+    min-width: 160px;
+    box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+    z-index: 1;
+    left: -180px; /* adjust this value to move the dropdown left or right */
+    bottom: -165px; /* adjust this value to move the dropdown up or down */
+}
+
+    .dropdown-content a {
+        color: black;
+        padding: 8px 16px;
+        text-decoration: none;
+        display: block;
+    }
+
+        .dropdown-content a:hover {
+            background-color: #ddd;
+        }
+
+.dropdown:hover .dropdown-content {
+    display: block;
+}
+
+.dropdown:hover .dropbtn {
+    background-color: #3e8e41;
+}
+
+/*
+slick css*/
+.slick-next, .slick-prev {
+    top: 110% !important;
+    z-index: 999999 !important;
+    left: 85% !important;
+    width: 40px !important;
+    height: 30px !important;
+}
+
+.slick-next {
+    margin-left: 25px;
+}
+
+.slick-dots {
+    padding-left: 50% !important;
+    top: 106% !important;
+}
+
+    .slick-dots li {
+        margin-right: 0px !important;
+    }
+
+        .slick-dots li.slick-active::after {
+            position: absolute !important;
+            content: '.' !important;
+            top: -5px !important;
+            left: 7px;
+            color: red !important;
+            opacity: 1 !important;
+            font-size: 40px !important;
+        }
+
+        .slick-dots li a {
+            color: #fff !important;
+            font-size: 0.8rem !important;
+        }
+

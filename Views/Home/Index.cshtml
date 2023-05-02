@@ -1,0 +1,60 @@
+﻿@{
+    ViewData["Title"] = "Home";
+}
+
+
+<div class="hero">
+    <div class="container">
+        <div class="row hero-inner">
+            <div class="col-lg-4 col-md-6 left">
+                <div class="main-content">
+                    <h1 class="mb-3">Chevrolet <span>Camaro</span></h1>
+                    <p class="mb-2">It is a long established fact that a set reader will distracted by the readable content of a page when looking at its layout technology.</p>
+                </div>
+                <button class="discover">
+                    <a href="/car">
+                        Discover
+                        <i class="fa fa-circle-arrow-right"></i>
+                    </a>
+                </button>
+                <div class="sec-content mt-5 row">
+                    <div class="col-6">
+                        <p class="p1">Production</p>
+                        <p class="p2">2023</p>
+                    </div>
+                    <div class="col-6">
+                        <p class="p1">Designer</p>
+                        <p class="p2">John Cena</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-8 col-md-6 right">
+                <div class="carz">
+                    <div><img src="https://wpshopmart.com/html/demo/car-website-template/img/1.png" /></div>
+                    <div><img src="https://wpshopmart.com/html/demo/car-website-template/img/2.png" /></div>
+                    <div><img src="https://wpshopmart.com/html/demo/car-website-template/img/3.png" /></div>
+                    <div><img src="https://wpshopmart.com/html/demo/car-website-template/img/4.png" /></div>
+                    <div><img src="https://wpshopmart.com/html/demo/car-website-template/img/5.png" /></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+@section Scripts{
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick.js"></script>
+<script>
+    $(document).ready(function () {
+        $(".carz").slick({
+            autoplay: true,
+            dots: true,
+            speed: 1000,
+            customPaging: function (slider, i) {
+                var thumb = $(slider.$slides[i]).data();
+                return '<a>' + (i + 1) + '</a>';
+            },
+        })
+    });
+</script>
+}

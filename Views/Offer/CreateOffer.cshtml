@@ -1,0 +1,86 @@
+﻿
+@model IEnumerable<Car>
+
+<div class="row row-cols-1 row-cols-md-3 g-4">
+    @foreach (var car in Model)
+    {
+        <div class="col">
+            <div class="card h-100">
+                <input type="hidden" name="carId" value="@car.CarID" />
+                <div style="height: 200px; overflow: hidden;">
+                    <img class="card-img-top" style="height: 100%; object-fit: cover;"
+                     src="@car.CarImageUrl">
+                </div>
+                <div class="card-body">
+                    <h5 class="card-title">@car.Manufacturer</h5>
+                    <p class="card-text">@car.Model</p>
+                    <p class="card-text">@car.VehicleNo</p>
+                </div>
+                <div class="card-footer">
+                    
+                    <button class="btn btn-primary" type="button" data-bs-toggle="modal"
+                        data-bs-target="#AddOfferModal" onclick="setCarId('@car.CarID')">
+                        Add Offer
+                    </button>
+
+                  
+                </div>
+            </div>
+        </div>
+    }
+</div>
+
+
+<!-- Add Offer Modal -->
+
+<div class="modal fade" id="AddOfferModal" tabindex="-1" aria-labelledby="AddOfferModalLabel"
+     aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title text-center font" id="AddOfferModalLabel">Add Offer</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
+                </button>
+            </div>
+            <form method="post" action="@Url.Action("AddOffer", "Offer")">
+                <div class="modal-body">
+                    <input type="hidden" name="carId" id="IdforCar" />
+                    <div class="row">
+                        <div class="col">
+                            <div class="form-group">
+                                <label class="form-label" for="DiscountRate">Discount Rate:</label>
+                                <input class="form-control" type="text" id="DiscountRate" name="DiscountRate" required />
+                               
+                            </div>
+                        </div>
+                        <div class="col">
+                            <div class="form-group">
+                                <label class="form-label" for="EndDate">End Date:</label>
+                                <input class="form-control" type="date" id="EndDate" name="EndDate" required/>
+                           
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label" for="OfferDescription">Offer Description:</label>
+                        <input class="form-control" type="text" id="OfferDescription" name="OfferDescription" required/>
+                 
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <button type="submit" class="btn btn-primary">Add Offer</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+@section Scripts{
+    <script>
+        function setCarId(carId) {
+            document.getElementById('IdforCar').value = carId;
+        
+        }
+    </script>
+}
+

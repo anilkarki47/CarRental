@@ -1,0 +1,166 @@
+﻿@model List<RentalRequest>
+
+@{
+    ViewData["Title"] = "Car Request";
+}
+<style>
+    .dataTables_wrapper{
+        margin: 0px 10px 10px 10px;
+    }
+</style>
+
+<div class="d-flex justify-content-center align-items-center h-100">
+    <div class="container">
+        <div class="card shadow-lg">
+            <div class="card-header">
+                <h4 class="fw-bold mb-0 text-center">Rental Histories</h4>
+            </div>
+
+
+@if (User.IsInRole("Admin") || User.IsInRole("Staff")){
+
+
+    <div class="d-flex justify-content-center mt-3">
+        <h5 class="me-4 setting-heading setting-pointer" data-target="table-rental">Rentals</h5>
+        <h5 class="setting-pointer" data-target="table-bill">Bills</h5>
+    </div>
+}
+            <div class="d-flex justify-content-center mt-3">
+                <form action="@Url.Action("RentalHistory","RentalData")" method="get" class="mb-2">
+                    <div class="input-group">
+                            <div class="input-group-append">
+                        <button class="btn btn-secondary" disabled>
+                                    From
+                                </button>
+                            </div>
+                            <input type="date" name="startDate" />
+                            <div class="input-group-append">
+                                <button class="btn btn-secondary" disabled>
+                                    To
+                                </button>
+                            </div>
+                        <input type="date" name="endDate" />
+                            <div class="input-group-append">
+                                <button class="btn btn-primary" type="submit">
+                                    Search
+                                </button>
+                            </div>
+                        </div>
+                    </form>
+            </div>
+         
+
+
+
+
+
+    <table class="table" id="table-rental">
+        <thead>
+            <tr>
+                <th>Brand</th>
+                <th>Model</th>
+                <th>Vehicle No</th>
+                <th>Requested By</th>
+                <th>Request Date</th>
+                <th>Status</th>
+                <th>Return Date</th>
+                <th>Authorized By</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var rentalRequest in Model)
+            {
+                     <tr class="@(rentalRequest.Status == "Pending" ? "text-warning" : rentalRequest.Status == "Approved" ? "text-success" : "text-danger")">
+
+                    <td>@rentalRequest.Car.Manufacturer</td>
+                    <td>@rentalRequest.Car.Model</td>
+                    <td>@rentalRequest.Car.VehicleNo</td>
+                    <td>@rentalRequest.User.Name</td>
+                    <td>@rentalRequest.RequestDate.ToShortDateString()</td>
+                    <td>@rentalRequest.Status</td>
+                     <td>@(rentalRequest.ReturnDate?.ToShortDateString() ?? "")</td>
+                    <td>@(rentalRequest.AuthorizedByUser != null ? rentalRequest.AuthorizedByUser.Name : "")</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+
+
+    <table class="table hide" id="table-bill">
+        <thead>
+            <tr>
+                <th>Model</th>
+                <th>Vehicle No</th>
+                <th>Requested By</th>
+                <th>Request Date</th>
+                <th>Return Date</th>
+                <th>Authorized By</th>
+                <th>Status</th>
+               <th>Payment Date</th>
+               <th>Total Amount</th>
+            </tr>
+        </thead>
+        <tbody>
+                    @foreach (var rentalRequest in Model.Where(r => r.Paid != null))
+            {
+                <tr class="@(rentalRequest.Paid == true ? "text-success" : "text-danger")">
+
+                    <td>@rentalRequest.Car.Model</td>
+                    <td>@rentalRequest.Car.VehicleNo</td>
+                    <td>@rentalRequest.User.Name</td>
+                    <td>@rentalRequest.RequestDate.ToShortDateString()</td>
+                    <td>@(rentalRequest.ReturnDate?.ToShortDateString() ?? "N/A")</td>
+                    <td>@(rentalRequest.AuthorizedByUser != null ? rentalRequest.AuthorizedByUser.Name : "N/A")</td>
+                    <td>@(rentalRequest.Paid.Value? "paid" : "unpaid")</td>
+                     <td>@(rentalRequest.PaymentDate?.ToShortDateString() ?? "")</td>
+                     <td>@rentalRequest.TotalAmount</td>
+
+                </tr>
+            }
+        </tbody>
+    </table>
+
+
+        </div>
+    </div>
+</div>
+
+
+
+@section Scripts{
+    <script>
+        $(document).ready(function () {
+            $("[data-target]").click(function () {
+                var targetId = $(this).data("target");
+                if (targetId === "table-rental") {
+                    $("#table-rental").show();
+                    $('#table-rental').DataTable({
+                        "ordering": false
+                    });
+                    $("#table-bill").hide();
+                    $('#table-bill').DataTable().destroy();
+                } else if (targetId === "table-bill") {
+                    $("#table-rental").hide();
+                    $("#table-bill").show();
+                    $('#table-bill').DataTable({
+                        "ordering": false
+                    });
+                    $('#table-rental').DataTable().destroy();
+                }
+                $("[data-target]").removeClass("setting-heading");
+                $(this).addClass("setting-heading");
+            });
+        });
+
+    </script>
+    <script>
+        $(document).ready(function () {
+            $('#customerRequest').DataTable();
+            $('#table-rental').DataTable();
+       
+        });
+    </script>
+
+}
+@*<a asp-controller="RequestCar" asp-action="AddRequestCar" asp-route-id="@rentalRequest.ReqID" class="btn btn-success">Approve</a>
+<a asp-controller="RequestCar" asp-action="AddRequestCar" asp-route-id="@rentalRequest.ReqID" class="btn btn-danger">Reject</a>*@
