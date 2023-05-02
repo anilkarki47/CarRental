@@ -10,7 +10,7 @@ var configuration = builder.Configuration;
 // Add services to the container.
 builder.Services.AddControllersWithViews();
 
-builder.Services.AddDbContext <ApplicationDbContext>(options =>
+builder.Services.AddDbContext<ApplicationDbContext>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
 
 builder.Services.AddIdentity<IdentityUser, IdentityRole>().AddDefaultTokenProviders().AddDefaultUI()
@@ -34,7 +34,7 @@ app.UseHttpsRedirection();
 app.UseStaticFiles();
 
 app.UseRouting();
-app.UseAuthentication();;
+app.UseAuthentication(); ;
 
 app.UseAuthorization();
 
@@ -42,13 +42,9 @@ app.MapRazorPages();
 app.MapControllerRoute(
     name: "default",
     pattern: "{controller=Home}/{action=Index}/{id?}");
-using (var scope = app.Services.CreateScope())
+using (var serviceScope = app.Services.CreateScope())
 {
-    var serviceProvider = scope.ServiceProvider;
-    await DbSeeder.SeedUser(serviceProvider);
+    var roleManager = serviceScope.ServiceProvider.GetRequiredService<RoleManager<IdentityRole>>();
+    DbSeeder.SeedUser(app, roleManager).Wait();
 }
-
-
-
-DbSeeder.SeedCar(app);
 app.Run();

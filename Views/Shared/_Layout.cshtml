@@ -16,9 +16,8 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick.css" />
 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick-theme.min.css" />
-    
-
 </head>
+
 <body>
     <header>
         <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
@@ -30,48 +29,50 @@
                     <span class="navbar-toggler-icon"></span>
                 </button>
                 <div class="d-flex justify-content-center">
-                <div class="navbar-collapse collapse d-sm-inline-flex justify-content-center">
-  
+                    <div class="navbar-collapse collapse d-sm-inline-flex justify-content-center">
+
                         <ul class="navbar-nav flex-grow-1">
                             <li class="nav-item">
                                 <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link text-dark" asp-area="" asp-controller="Car"  asp-action="Index">Cars</a>
+                                <a class="nav-link text-dark" asp-area="" asp-controller="Car" asp-action="Index">Cars</a>
                             </li>
-                        @if (User.Identity.IsAuthenticated)
-                        {
-                            @if (User.IsInRole("Admin")){
-                   
-                            <li class="nav-item">
-                                <a class="nav-link text-dark" asp-area="" asp-controller="User" asp-action="Index">User Control</a>
-                            </li>
-                            }
-                            if (User.IsInRole("Admin") || User.IsInRole("Staff")){
-                            <li class="nav-item">
-                                <a class="nav-link text-dark" asp-controller="Offer" asp-action="Index">Offer</a>
-                            </li>
-                                <li class="nav-item">
-                                    <a class="nav-link text-dark" asp-controller="Damage" asp-action="Index">Damage</a>
-                                </li>
-                            }
-                            <li class="nav-item">
-                                <a class="nav-link text-dark" asp-controller="RentalData" asp-action="Index">Rental Requests</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link text-dark" asp-controller="RentalData" asp-action="RentalHistory">Rental Histories</a>
-                            </li>
-                            @if (User.IsInRole("Customer"))
+                            @if (User.Identity.IsAuthenticated)
                             {
+                                @if (User.IsInRole("Admin"))
+                                {
+
+                                    <li class="nav-item">
+                                        <a class="nav-link text-dark" asp-area="" asp-controller="User" asp-action="Index">User Control</a>
+                                    </li>
+                                }
+                                if (User.IsInRole("Admin") || User.IsInRole("Staff"))
+                                {
+                                    <li class="nav-item">
+                                        <a class="nav-link text-dark" asp-controller="Offer" asp-action="Index">Offer</a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link text-dark" asp-controller="Damage" asp-action="Index">Damage</a>
+                                    </li>
+                                }
                                 <li class="nav-item">
-                                    <a class="nav-link text-dark" asp-controller="RentalData" asp-action="CustomerBill">Bills</a>
+                                    <a class="nav-link text-dark" asp-controller="RentalData" asp-action="Index">Rental Requests</a>
                                 </li>
+                                <li class="nav-item">
+                                    <a class="nav-link text-dark" asp-controller="RentalData" asp-action="RentalHistory">Rental Histories</a>
+                                </li>
+                                @if (User.IsInRole("Customer"))
+                                {
+                                    <li class="nav-item">
+                                        <a class="nav-link text-dark" asp-controller="RentalData" asp-action="CustomerBill">Bills</a>
+                                    </li>
+                                }
                             }
-                        }
-                    </ul>
-               </div>
-               </div>
-               <div>
+                        </ul>
+                    </div>
+                </div>
+                <div>
                     <partial name="_LoginPartial" />
                 </div>
             </div>
@@ -94,14 +95,13 @@
 
 
 
-  
+
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>
     <script src="//cdn.datatables.net/1.11.5/js/jquery.dataTables.min.js"></script>
     @*Sweet alert cdn*@
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-
 
     <script>
         let sidebar = document.querySelector(".sidebar");

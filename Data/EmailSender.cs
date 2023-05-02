@@ -13,8 +13,8 @@ namespace HajurKoCarRental.Data
 
         public async Task SendEmailAsync(string email, string subject, string htmlMessage)
         {
-            string fromMail = "nabinshrestha348@gmail.com";
-            string fromPassword = "akkyzvhdnlhsbelp";
+            string fromMail = "jaminsampang90@gmail.com";
+            string fromPassword = "ejxruyuuqpljqlmu";
 
             MailMessage message = new MailMessage();
 

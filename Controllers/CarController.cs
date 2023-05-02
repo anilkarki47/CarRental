@@ -83,9 +83,9 @@ namespace HajurKoCarRental.Controllers
         public async Task<IActionResult> Create(Car obj, IFormFile file)
         {
             var account = new Account(
-                "NabinNs",
-                "428542427551857",
-                "A1gFD-djrOGlzEhYe-ysX_A2JUo");
+                "ddf1stgyh",
+                "697218812787193",
+                "ZX0x_qSwOX9QS-gqzXaf30lufQg");
             var cloudinary = new Cloudinary(account);
 
             var uploadResult = new ImageUploadResult();
