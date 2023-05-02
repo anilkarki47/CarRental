@@ -1,16 +1,16 @@
 ﻿@model ApplicationUser
 
-<h4 class="text-center">User Setting</h4>
-<div class="d-flex justify-content-center">
-    <h6 class="me-4 mb-5 setting-heading setting-pointer" data-target="account-form">Account</h6>
-    <h6 class="mb-5 setting-pointer" data-target="password-info-form">Password</h6>
+<h4 class="text-start pb-3 fw-bold fs-2">User Setting</h4>
+<div class="d-flex justify-content-center gap-5">
+    <h5 class="mb-3 setting-heading setting-pointer" data-target="account-form">Account</h5>
+    <h5 class="mb-3 setting-pointer" data-target="password-info-form">Password</h5>
 </div>
 <form method="post" id="account-form">
     <div class="d-flex justify-content-center align-items-center h-100">
         <div class="container">
             <div class="card shadow-lg">
-                <div class="card-header">
-                    <h4 class="fw-bold mb-0 text-center">Edit User Detail</h4>
+                <div class="card-header bg-dark">
+                    <h4 class="fw-bold mb-0 text-center text-white pt-3 pb-3">Edit User</h4>
                 </div>
                 <div class="card-body">
                     <input hidden asp-for="Id" />
@@ -41,7 +41,7 @@
                         }
                         else
                         {
-                            <p>No driving license photo available.</p>
+                            <p class="fs-6 fw-normal">No driving license photo available.</p>
                         }
                         </div>
                     <div class=" col mb-3">
@@ -52,16 +52,16 @@
                         }
                         else
                         {
-                            <p>No citizenship photo available.</p>
+                            <p class="fs-6 fw-normal" fw-light>No citizenship photo available.</p>
                         }
                     </div>
                     </div>
 
                     <div class="d-flex justify-content-center">
                           @if (User.IsInRole("Admin")){
-                        <button type="submit" class="btn btn-primary me-2">Update</button>
+                        <button type="submit" class="btn btn-dark me-2">Update</button>
                           }
-                        <a asp-controller="User" asp-action="Index" class="btn btn-secondary">Back</a>
+                        <a asp-controller="User" asp-action="Index" class="btn btn-secondary" style="background-color: #f2f2f2; margin-left: 15px;">Back</a>
                     </div>
                 </div>
             </div>
@@ -74,8 +74,8 @@
     <div class="d-flex justify-content-center align-items-center h-100">
         <div class="container">
             <div class="card shadow-lg">
-                <div class="card-header">
-                    <h4 class="fw-bold mb-0 text-center">Change Password</h4>
+                <div class="card-header bg-dark">
+                    <h4 class="fw-bold mb-0 text-center text-white pt-3 pb-3">Change Password</h4>
                 </div>
                 <div class="card-body">
                     <input hidden asp-for="Id" name="userId" />
@@ -89,8 +89,8 @@
 
                     </div>
                     <div class="d-flex justify-content-center">
-                        <button type="submit" class="btn btn-primary me-2">Update Password</button>
-                        <a asp-controller="User" asp-action="Index ms-2" class="btn btn-secondary">Back</a>
+                        <button type="submit" class="btn btn-dark me-2">Update</button>
+                        <a asp-controller="User" asp-action="Index ms-2" class="btn btn-secondary"  style="background-color: #f2f2f2; margin-left: 15px;">Back</a>
                         </div>
                 </div>
                

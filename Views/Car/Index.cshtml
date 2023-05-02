@@ -2,16 +2,17 @@
 @{
     ViewData["Title"] = "Car Page";
 }
+
 <style>
     .card {
         border: none;
-        box-shadow: 0 4px 8px rgba(0,0,0,.05);
+        box-shadow: 0 6px 10px rgba(0,0,0,.28);
         transition: box-shadow 0.3s ease-in-out;
         height: 100%;
     }
 
         .card:hover {
-            box-shadow: 0 8px 16px rgba(0,0,0,.1);
+            box-shadow: 0 8px 16px rgba(0,0,0,.28);
             transform: scale(1.04);
         }
 
@@ -42,37 +43,69 @@
         object-fit: cover;
     }
 
-    .text-small{
+    .text-small {
         font-size: 13px;
     }
 
+    .no-border {
+        border: none !important;
+        box-shadow: none !important;
+    }
 
+    .delete-confirm-button {
+        background-color: #d9534f !important;
+        box-shadow: none !important;
+        border: none !important;
+        box-shadow: none !important;
+        border-radius: 0 !important;
+    }
+
+    .delete-cancel-button {
+        background-color: #f2f2f2 !important;
+        color: black !important;
+        border: none !important;
+        box-shadow: none !important;
+        border-radius: 0 !important;
+    }
+    .title { 
+        font-weight: bold;
+    }
+
+    .swal2-content {
+        padding: 10px !important;
+    }
+
+    .swal2-actions {
+        margin: 10px !important;
+    }
 
 </style>
 
 <div class="container p-3 test">
-    <div class="row">
-        <div class="col-6">
+    <div class="row align-items-center">
+        <div class="col-md-6 mt-4">
             <h2 class="text-primary">Cars List</h2>
         </div>
         @if (User.IsInRole("Admin") || User.IsInRole("Staff"))
-          {
-            <div class="col-6 text-end">
-               <a asp-controller="Car" asp-action="Create" class="btn btn-primary">Add New Car</a>
-               <a asp-controller="Car" asp-action="TableCarView" class="btn btn-primary">Table View</a>
-             </div>
-        
-          <div class="d-flex justify-content-center">
-            <a asp-controller="Car" asp-action="Index" asp-route-filter="all" class="btn btn-secondary ms-3 active">All</a>
-            <a asp-controller="Car" asp-action="Index" asp-route-filter="available" class="btn btn-secondary ms-3">Available</a>
-            <a asp-controller="Car" asp-action="Index" asp-route-filter="rent" class="btn btn-secondary ms-3">On Rent</a>
-            <a asp-controller="Car" asp-action="Index" asp-route-filter="frequent" class="btn btn-secondary ms-3">Frequent</a>
-            <a asp-controller="Car" asp-action="Index" asp-route-filter="notrented" class="btn btn-secondary ms-3">Not Rented</a>
-        </div>
+        {
+            <div class="col-md-6 text-end">
+                <a asp-controller="Car" asp-action="Create" class="btn btn-dark"><i class="bi bi-plus-circle me-2"></i><span>Add Car</span></a>
+                <a asp-controller="Car" asp-action="TableCarView" class="btn btn-dark ms-3"><i class="bi bi-table me-2"></i><span>Table View</span></a>
+            </div>
+
+            <div class="col-12 mt-3 d-flex justify-content-center">
+                <a asp-controller="Car" asp-action="Index" asp-route-filter="all" class="btn ms-3 active">All</a>
+                <a asp-controller="Car" asp-action="Index" asp-route-filter="available" class="btn ms-3">Available</a>
+                <a asp-controller="Car" asp-action="Index" asp-route-filter="rent" class="btn ms-3">On Rent</a>
+                <a asp-controller="Car" asp-action="Index" asp-route-filter="frequent" class="btn ms-3">Frequent</a>
+                <a asp-controller="Car" asp-action="Index" asp-route-filter="notrented" class="btn ms-3">Not Rented</a>
+            </div>
         }
     </div>
 </div>
-<hr class="mt-2" />
+
+
+<hr style="margin-top: -5px; margin-bottom-2px;" />
 
 <div class="row row-cols-1 row-cols-md-3 g-4">
     @foreach (var car in Model)
@@ -80,24 +113,23 @@
         <div class="col">
             <div class="card h-100">
                 <input type="hidden" name="carId" value="@car.CarID" />
-                <div style="overflow: hidden;">
+                <div class="pt-4 pb-2" style="overflow: hidden;">
                     <img class="card-img-top" src="@car.CarImageUrl">
                 </div>
                 <div class="card-body">
-                    <h5 class="card-title">@car.Manufacturer (@car.Model)</h5>
+                    <h5 class="card-title fs-4 pb-2 text-dark">@car.Manufacturer (@car.Model)</h5>
                     <div class="card-text">
-                        <p><strong>Vehicle No:</strong> @car.VehicleNo</p>
-                        <p><strong>Availability:</strong> @car.IsAvailable</p>
-                        <p><strong>Rental Rate:</strong> @car.RentalRate</p>
-                        @{
-                            decimal offerValue = 0;
-                        }
+                        <div class="flex-column ">
+                            <p class="mb-1 ps-0"><strong>Vehicle No:</strong> @car.VehicleNo</p>
+                            <p class="mb-1 ps-0"><strong>Rental Rate:</strong> @car.RentalRate</p>
+                            <p class="mb-1 ps-0"><strong>Availability:</strong> @car.IsAvailable</p>
+                        </div>
                         @if (car.Offers != null && car.Offers.Any(o => o.Status == true))
                         {
                             var offer = car.Offers.FirstOrDefault(o => o.Status == true);
                             <p class="text-small text-danger m-0 p-0">@offer.OfferDescription </p>
                             <p class="text-small text-danger m-0 p-0"> ( @offer.DiscountRate % off) Till @offer.EndDate</p>
-                            offerValue = offer.DiscountRate;
+
                         }
 
 
@@ -106,19 +138,21 @@
                 @if (User.Identity.IsAuthenticated)
                 {
                     <div class="card-footer">
-                        @if (User.IsInRole("Admin") || User.IsInRole("Staff"))
-                        {
-                            <a asp-controller="Car" asp-action="Edit" asp-route-id="@car.CarID" class="btn btn-success">Edit</a>
-                            <a onclick="deleteCar('@car.CarID')" class="btn btn-danger">Delete</a>
-                            <button class="btn btn-secondary" type="button" data-bs-toggle="modal"
-                        data-bs-target="#AddOfferModal" onclick="setCarId('@car.CarID')">
-                                Add Offer
-                            </button>
-                        }
-                        @if (car.IsAvailable && User.IsInRole("Customer")) {
-                            <a asp-controller="RequestCar" asp-action="AddRequestCar" asp-route-id="@car.CarID" asp-route-dis="@offerValue" class="btn btn-warning">Rent</a>
-                        }
-                    </div>
+    @if (User.IsInRole("Admin") || User.IsInRole("Staff"))
+    {
+        <button class="btn btn-dark me-1" type="button" data-bs-toggle="modal"
+            data-bs-target="#AddOfferModal" onclick="setCarId('@car.CarID')">
+            Add Offer
+        </button>
+        <a asp-controller="Car" asp-action="Edit" asp-route-id="@car.CarID" class="btn btn-success me-1">Edit</a>
+        <a onclick="deleteCar('@car.CarID')" class="btn btn-danger">Delete</a>
+    }
+    @if (car.IsAvailable && User.IsInRole("Customer"))
+    {
+        <a asp-controller="RequestCar" asp-action="AddRequestCar" asp-route-id="@car.CarID" class="btn btn-warning">Rent</a>
+    }
+</div>
+
                 }
 
             </div>
@@ -133,39 +167,37 @@
      aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title text-center font" id="AddOfferModalLabel">Add Offer</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
-                </button>
+            <div class="modal-header d-flex bg-dark justify-content-center align-items-center">
+                <h5 class="modal-title fw-bold mb-0 pt-2 pb-2 text-white fs-4" id="AddOfferModalLabel">Add Offer</h5>
             </div>
             <form method="post" action="@Url.Action("AddOffer", "Offer")">
                 <div class="modal-body">
-                    <input type="hidden" name="carId" id="IdforCar" />
+                    <input type="hidden" name="carId" id="IdforCar" class="no-border" />
                     <div class="row">
                         <div class="col">
                             <div class="form-group">
                                 <label class="form-label" for="DiscountRate">Discount Rate:</label>
-                                <input class="form-control" type="text" id="DiscountRate" name="DiscountRate" required />
+                                <input class="form-control no-border" type="text" id="DiscountRate" name="DiscountRate" required />
 
                             </div>
                         </div>
                         <div class="col">
                             <div class="form-group">
                                 <label class="form-label" for="EndDate">End Date:</label>
-                                <input class="form-control" type="date" id="EndDate" name="EndDate" required />
+                                <input class="form-control no-border" type="date" id="EndDate" name="EndDate" required />
 
                             </div>
                         </div>
                     </div>
                     <div class="form-group">
                         <label class="form-label" for="OfferDescription">Offer Description:</label>
-                        <input class="form-control" type="text" id="OfferDescription" name="OfferDescription" required />
+                        <input class="form-control no-border" type="text" id="OfferDescription" name="OfferDescription" required />
 
                     </div>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                    <button type="submit" class="btn btn-primary">Add Offer</button>
+                    <button type="submit" class="btn btn-dark px-5">Add</button>
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" style="background-color: #f2f2f2; margin-left: 15px;">Close</button>
                 </div>
             </form>
         </div>
@@ -190,13 +222,27 @@
     <script>
         function deleteCar(carId) {
             Swal.fire({
-                title: 'Are you sure?',
-                text: "You won't be able to revert this!",
-                icon: 'warning',
-                showCancelButton: true,
-                confirmButtonColor: '#3085d6',
-                cancelButtonColor: '#d33',
-                confirmButtonText: 'Yes, delete it!'
+               html: `
+                <div class="swal2-custom-icon">
+                    <i class="bi bi-trash text-danger" style="font-size: 5rem;"></i>
+                </div>
+                <div class="swal2-custom-title fs-1 pb-3 fw-bold">
+                    Are you sure?
+                </div>
+                <div class="swal2-custom-text pt-3 pb-3">
+                    Do you really want to delete this car? This process cannot be undone!
+                </div>
+            `,
+            showCancelButton: true,
+            confirmButtonColor: 'crimson',
+            cancelButtonColor: 'gray',
+            confirmButtonText: 'Delete',
+            customClass: {
+                confirmButton: 'delete-confirm-button',
+                cancelButton: 'delete-cancel-button',
+                content: 'swal2-content',
+                actions: 'swal2-actions'
+            }
             }).then((result) => {
                 if (result.isConfirmed) {
                     // Make an AJAX call to delete the car from the server

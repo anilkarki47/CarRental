@@ -7,16 +7,17 @@
     @if (SignInManager.IsSignedIn(User))
     {
         <li class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                <i class='bx bx-user' style="width: 40px;"></i>
+            <a class="nav-link dropdown-toggle d-flex align-items-center" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false" style="padding-right: 0.25rem;">
+               
+                <i class="bi bi-person-circle" style="width: 40px; font-size: 1.5rem;"></i>
             </a>
-            <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
-                <li><span class="dropdown-item">@UserManager.GetUserName(User)</span></li>
+            <ul class="dropdown-menu dropdown-menu-end pt-3 pb-3 px-2" aria-labelledby="navbarDropdown">
+                <li><span class="dropdown-item fs-5">@UserManager.GetUserName(User)</span></li>
                 <li><hr class="dropdown-divider"></li>
-                <li><a class="dropdown-item" asp-area="Identity" asp-page="/Account/Manage/Index" title="Manage">Settings</a></li>
+                <li><a class="dropdown-item" asp-area="Identity" asp-page="/Account/Manage/Index" title="Manage"><i class="bi bi-gear me-2"></i><span class="">Settings</span></a></li>
                 <li>
                     <form id="logoutForm" asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@Url.Action("Index", "Home", new { area = "" })">
-                        <button id="logout" type="submit" class="dropdown-item">Logout</button>
+                        <button id="logout" type="submit" class="dropdown-item"><i class="bi bi-box-arrow-left me-2"></i><span class="">Logout</span></button>
                     </form>
                 </li>
             </ul>

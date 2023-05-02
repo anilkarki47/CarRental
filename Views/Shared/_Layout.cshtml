@@ -4,13 +4,15 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>@ViewData["Title"] - HajurKoCarRental</title>
-    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/HajurKoCarRental.styles.css" asp-append-version="true" />
     <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <link href="~/css/StyleSheet.css" rel="stylesheet" />
-    @*CDN datatable*@
+    @*CDN Bootstrap*@
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.css" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
+    @*CDN Datatable*@
     <link rel="stylesheet" href="https://cdn.datatables.net/1.13.4/css/jquery.dataTables.css" />
     @*slick cdn*@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick.css" />
@@ -20,7 +22,7 @@
 
 <body>
     <header>
-        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
+        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-dark bg-primary border-bottom box-shadow mb-3">
             <div class="container-fluid">
 
                 <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">HajurKoCarRental</a>
@@ -33,10 +35,10 @@
 
                         <ul class="navbar-nav flex-grow-1">
                             <li class="nav-item">
-                                <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
+                                <a class="nav-link" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link text-dark" asp-area="" asp-controller="Car" asp-action="Index">Cars</a>
+                                <a class="nav-link" asp-area="" asp-controller="Car" asp-action="Index">Cars</a>
                             </li>
                             @if (User.Identity.IsAuthenticated)
                             {
@@ -44,28 +46,28 @@
                                 {
 
                                     <li class="nav-item">
-                                        <a class="nav-link text-dark" asp-area="" asp-controller="User" asp-action="Index">User Control</a>
+                                        <a class="nav-link " asp-area="" asp-controller="User" asp-action="Index">User Control</a>
                                     </li>
                                 }
                                 if (User.IsInRole("Admin") || User.IsInRole("Staff"))
                                 {
                                     <li class="nav-item">
-                                        <a class="nav-link text-dark" asp-controller="Offer" asp-action="Index">Offer</a>
+                                        <a class="nav-link " asp-controller="Offer" asp-action="Index">Offer</a>
                                     </li>
                                     <li class="nav-item">
-                                        <a class="nav-link text-dark" asp-controller="Damage" asp-action="Index">Damage</a>
+                                        <a class="nav-link " asp-controller="Damage" asp-action="Index">Damage</a>
                                     </li>
                                 }
                                 <li class="nav-item">
-                                    <a class="nav-link text-dark" asp-controller="RentalData" asp-action="Index">Rental Requests</a>
+                                    <a class="nav-link " asp-controller="RentalData" asp-action="Index">Rental Requests</a>
                                 </li>
                                 <li class="nav-item">
-                                    <a class="nav-link text-dark" asp-controller="RentalData" asp-action="RentalHistory">Rental Histories</a>
+                                    <a class="nav-link " asp-controller="RentalData" asp-action="RentalHistory">Rental Histories</a>
                                 </li>
                                 @if (User.IsInRole("Customer"))
                                 {
                                     <li class="nav-item">
-                                        <a class="nav-link text-dark" asp-controller="RentalData" asp-action="CustomerBill">Bills</a>
+                                        <a class="nav-link " asp-controller="RentalData" asp-action="CustomerBill">Bills</a>
                                     </li>
                                 }
                             }
