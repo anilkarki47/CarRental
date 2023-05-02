@@ -2,22 +2,24 @@
 @{
     ViewData["Title"] = "View Car";
 }
- <div class="d-flex justify-content-center align-items-center h-90">
-         
-            <div class="container mt-5">
-                <h4 class="text-center mb-5 text-success"><u>Detail Information of Car</u></h4>
-                <div class="card shadow-lg">
+<div class="d-flex justify-content-center align-items-center h-90">
+    <div class="container mt-5">
+        <div class="d-flex align-items-center justify-content-between mb-4">
+            <h1 class="text-start text-dark fw-bold fs-3" style="text-decoration: none;">Car Details</h1>
+            <a asp-controller="Car" asp-action="Index" class="btn btn-secondary" style="background-color: #f2f2f2; margin-left: 15px;">Back</a>
+        </div>
+        <div class="card shadow-lg">
                     <div class="row">
                         <div class="col-md-4">
                            
-                                <img class="card-img-top m-3" style="height:325px;"
+                                <img class="card-img-top m-3" style="height:320px; width: 400px;"
                                     src="@Model.CarImageUrl">
                           
                         
                         </div>
                         <div class="col-md-8">
                             <div class="card-body mt-2">
-                                <h4 class="card-title">@Model.Manufacturer</h4>
+                                <h4 class="card-title text-black">@Model.Manufacturer</h4>
                                 <hr>
                                 <div class="row mt-3">
                                     <div class="col-sm-3">
@@ -59,7 +61,7 @@
                                     <p class="card-text">@Model.IsAvailable</p>
                                     </div>
                                 </div>
-                        <a asp-controller="Car" asp-action="Index" class="btn btn-secondary mt-3">Back</a>
+                        
                             </div>
                         </div>
                     </div>

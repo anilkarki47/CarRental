@@ -3,20 +3,36 @@
     ViewData["Title"] = "Damage";
 }
 
-<div class="d-flex justify-content-center align-items-center h-100">
-    <div class="container">
-        <div class="card shadow-lg">
-            <div class="card-header">
-                <h4 class="fw-bold mb-0 text-center">Rental Requests Action</h4>
-            </div>
+<style>
+    .no-border {
+        border: none !important;
+    }
+    .no-outline {
+        outline: none !important;
+        box-shadow: none !important;
+    }
+    .dataTables_filter input {
+        margin-bottom: 20px;
+    }
+    .dataTables_filter input:hover,
+    .dataTables_filter input:focus {
+        box-shadow: none !important;
+        outline: 1px solid #ccc !important;
+    }
+</style>
+
+<div class="d-flex justify-content-center align-items-center h-100 no-border no-outline">
+    <div class="container no-border pt-4">
+        <h2 class="fw-bold mb-0 text-start text-dark pt-3 pb-4">Damage Request</h2>
+        <hr/>
     <table class="table" id="damageTable">
         <thead>
             <tr>
-                <th>User</th>
-                <th>Model</th>
-                <th>Vehicle No</th>
-                <th>Damage Type</th>
-                <th>Damage Description</th>
+                <th class="bg-dark text-light">User</th>
+                <th class="bg-dark text-light">Model</th>
+                <th class="bg-dark text-light">Vehicle No</th>
+                <th class="bg-dark text-light">Damage Type</th>
+                <th class="bg-dark text-light">Damage Description</th>
 
             </tr>
         </thead>

@@ -5,34 +5,52 @@
     ViewData["Title"] = "Register";
 }
 
+<style>
+    .form-control,
+    .form-select {
+        border: none !important;
+        box-shadow: none !important;
+    }
+    .card-header {
+        margin-bottom: 20px;
+    }
+    #registerSubmit {
+        display: block;
+        margin-left: auto;
+        margin-right: auto;
+    }
+</style>
 
 <div class="row">
-  <div class="col-md-6 mx-auto">
-    <form id="registerForm" enctype="multipart/form-data" asp-route-returnUrl="@Model.ReturnUrl" method="post" class="p-3 rounded shadow">
-      <h2 class="text-center mb-4">Create a new account</h2>
+  <div class="col-md-6 mx-auto mt-4">
+    <form id="registerForm" enctype="multipart/form-data" asp-route-returnUrl="@Model.ReturnUrl" method="post" class="rounded pb-4" style="outline: 1px solid #2b2b2b !important;">
+      <!-- <h2 class="text-center mb-4">Create a new account</h2> -->
+      <div class="card-header bg-dark">
+          <h4 class="fw-bold mb-0 text-center text-white pt-5 pb-5">Create a new account</h4>
+      </div>
       <div asp-validation-summary="ModelOnly" class="alert alert-danger mb-3"></div>
-      <div class="form-floating mb-3">
-        <input asp-for="Input.Name" class="form-control" aria-required="true" />
+      <div class="form-floating mb-3 px-3">
+        <input asp-for="Input.Name" class="form-control text-black" aria-required="true" />
         <label asp-for="Input.Name">Name</label>
         <span asp-validation-for="Input.Name" class="text-danger"></span>
       </div>
-      <div class="form-floating mb-3">
-        <input asp-for="Input.Email" class="form-control" autocomplete="username" aria-required="true" />
+      <div class="form-floating mb-3 mb-3 px-3">
+        <input asp-for="Input.Email" class="form-control text-black" autocomplete="username" aria-required="true" />
         <label asp-for="Input.Email">Email address</label>
         <span asp-validation-for="Input.Email" class="text-danger"></span>
       </div>
-      <div class="form-floating mb-3">
-        <input asp-for="Input.PhoneNumber" class="form-control" aria-required="true" />
+      <div class="form-floating mb-3 mb-3 px-3">
+        <input asp-for="Input.PhoneNumber" class="form-control text-black" aria-required="true" />
         <label asp-for="Input.PhoneNumber">Phone number</label>
         <span asp-validation-for="Input.PhoneNumber" class="text-danger"></span>
       </div>
-      <div class="form-floating mb-3">
-        <input asp-for="Input.Password" class="form-control" autocomplete="new-password" aria-required="true" />
+      <div class="form-floating mb-3 mb-3 px-3">
+        <input asp-for="Input.Password" class="form-control text-black" autocomplete="new-password" aria-required="true" />
         <label asp-for="Input.Password">Password</label>
         <span asp-validation-for="Input.Password" class="text-danger"></span>
       </div>
-      <div class="form-floating mb-3">
-        <input asp-for="Input.ConfirmPassword" class="form-control" autocomplete="new-password" aria-required="true" />
+      <div class="form-floating mb-3 mb-3 px-3">
+        <input asp-for="Input.ConfirmPassword" class="form-control text-black" autocomplete="new-password" aria-required="true" />
         <label asp-for="Input.ConfirmPassword">Confirm password</label>
         <span asp-validation-for="Input.ConfirmPassword" class="text-danger"></span>
       </div>
@@ -40,27 +58,27 @@
             {
                 <div class="mb-3">
                     <label asp-for="Input.CitizenshipURL">Citizenship URL</label>
-                    <input asp-for="Input.CitizenshipURL" type="file" class="form-control" autocomplete="username" aria-required="true" name="Citizenship" id="Citizenship"  accept="image/*"/>
+                    <input asp-for="Input.CitizenshipURL" type="file" class="form-control text-black" autocomplete="username" aria-required="true" name="Citizenship" id="Citizenship"  accept="image/*"/>
                     <span asp-validation-for="Input.CitizenshipURL" class="text-danger"></span>
                 </div>
                 <div class="mb-3">
                     <label asp-for="Input.DrivingLicenseURL">Driving license URL</label>
-                <input asp-for="Input.DrivingLicenseURL" type="file" class="form-control" autocomplete="username" aria-required="true" name="DrivingLicense" id="DrivingLicense" accept="image/*" />
+                <input asp-for="Input.DrivingLicenseURL" type="file" class="form-control text-black" autocomplete="username" aria-required="true" name="DrivingLicense" id="DrivingLicense" accept="image/*" />
                 <span asp-validation-for="Input.DrivingLicenseURL" class="text-danger"></span>
             </div>
         }
       @if (User.IsInRole("Admin"))
-      {
-        <div class="form-floating mb-3">
-          <select asp-for="Input.Role" class="form-select">
-            <option disabled selected>-Select Role-</option>
-             <option value="@SD.Role_User_Admin">@SD.Role_User_Admin</option>
-              <option value="@SD.Role_User_Staff">@SD.Role_User_Staff</option>
-          </select>
-          <label asp-for="Input.Role">Role</label>
-        </div>
-      }
-      <button id="registerSubmit" type="submit" class="w-100 btn btn-primary btn-lg mb-3">Register</button>
+    {
+      <div class="form-floating mb-3 px-3">
+        <select class="text-black" asp-for="Input.Role" class="form-select">
+          <option class="text-black" disabled selected>Select Role</option>
+           <option class="text-black" value="@SD.Role_User_Admin">@SD.Role_User_Admin</option>
+            <option class="text-black" value="@SD.Role_User_Staff">@SD.Role_User_Staff</option>
+        </select>
+
+      </div>
+    }
+      <button id="registerSubmit" type="submit" class="px-5 py-3 text-center btn btn-dark btn-md">Register</button>
     </form>
   </div>
 </div>
