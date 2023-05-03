@@ -7,14 +7,26 @@
     .dataTables_wrapper{
         margin: 0px 10px 10px 10px;
     }
+    .search-margin-bottom {
+    margin-bottom: 20px;
+    }
+    .dataTables_length {
+    margin-bottom: 20px;
+}
+
+.dataTables_filter {
+    margin-bottom: 20px;
+}
+
+
 </style>
 
 <div class="d-flex justify-content-center align-items-center h-100">
     <div class="container">
-        <div class="card shadow-lg">
             <div class="card-header">
-                <h4 class="fw-bold mb-0 text-center">Rental Histories</h4>
+                <h4 class="fw-bold fs-2 text-start pt-5 pb-4">Rental Histories</h4>
             </div>
+        <div class="card">
 
 
 @if (User.IsInRole("Admin") || User.IsInRole("Staff")){
@@ -25,29 +37,29 @@
         <h5 class="setting-pointer" data-target="table-bill">Bills</h5>
     </div>
 }
-            <div class="d-flex justify-content-center mt-3">
-                <form action="@Url.Action("RentalHistory","RentalData")" method="get" class="mb-2">
-                    <div class="input-group">
-                            <div class="input-group-append">
-                        <button class="btn btn-secondary" disabled>
-                                    From
-                                </button>
-                            </div>
-                            <input type="date" name="startDate" />
-                            <div class="input-group-append">
-                                <button class="btn btn-secondary" disabled>
-                                    To
-                                </button>
-                            </div>
-                        <input type="date" name="endDate" />
-                            <div class="input-group-append">
-                                <button class="btn btn-primary" type="submit">
-                                    Search
-                                </button>
-                            </div>
-                        </div>
-                    </form>
+<div class="d-flex justify-content-center mt-3">
+    <form action="@Url.Action("RentalHistory","RentalData")" method="get" class="mb-2 search-margin-bottom">
+        <div class="input-group">
+            <div class="input-group-append">
+                <button class="btn btn-secondary" disabled>
+                    From
+                </button>
             </div>
+            <input type="date" name="startDate" />
+            <div class="input-group-append">
+                <button class="btn btn-secondary" disabled>
+                    To
+                </button>
+            </div>
+            <input type="date" name="endDate" />
+            <div class="input-group-append">
+                <button class="btn btn-dark text-white" type="submit">
+                    Search
+                </button>
+            </div>
+        </div>
+    </form>
+</div>
          
 
 
@@ -57,20 +69,20 @@
     <table class="table" id="table-rental">
         <thead>
             <tr>
-                <th>Brand</th>
-                <th>Model</th>
-                <th>Vehicle No</th>
-                <th>Requested By</th>
-                <th>Request Date</th>
-                <th>Status</th>
-                <th>Return Date</th>
-                <th>Authorized By</th>
+                <th class="bg-dark text-light">Brand</th>
+                <th class="bg-dark text-light">Model</th>
+                <th class="bg-dark text-light">Vehicle No</th>
+                <th class="bg-dark text-light">Requested By</th>
+                <th class="bg-dark text-light">Request Date</th>
+                <th class="bg-dark text-light">Status</th>
+                <th class="bg-dark text-light">Return Date</th>
+                <th class="bg-dark text-light">Authorized By</th>
             </tr>
         </thead>
         <tbody>
             @foreach (var rentalRequest in Model)
             {
-                     <tr class="@(rentalRequest.Status == "Pending" ? "text-warning" : rentalRequest.Status == "Approved" ? "text-success" : "text-danger")">
+                     <tr class="@(rentalRequest.Status == "Pending" ? "text-black" : rentalRequest.Status == "Approved" ? "text-black" : "text-black")">
 
                     <td>@rentalRequest.Car.Manufacturer</td>
                     <td>@rentalRequest.Car.Model</td>
@@ -89,21 +101,21 @@
     <table class="table hide" id="table-bill">
         <thead>
             <tr>
-                <th>Model</th>
-                <th>Vehicle No</th>
-                <th>Requested By</th>
-                <th>Request Date</th>
-                <th>Return Date</th>
-                <th>Authorized By</th>
-                <th>Status</th>
-               <th>Payment Date</th>
-               <th>Total Amount</th>
+                <th class="bg-dark text-light">Model</th>
+                <th class="bg-dark text-light">Vehicle No</th>
+                <th class="bg-dark text-light">Requested By</th>
+                <th class="bg-dark text-light">Request Date</th>
+                <th class="bg-dark text-light">Return Date</th>
+                <th class="bg-dark text-light">Authorized By</th>
+                <th class="bg-dark text-light">Status</th>
+               <th class="bg-dark text-light">Payment Date</th>
+               <th class="bg-dark text-light">Total Amount</th>
             </tr>
         </thead>
         <tbody>
                     @foreach (var rentalRequest in Model.Where(r => r.Paid != null))
             {
-                <tr class="@(rentalRequest.Paid == true ? "text-success" : "text-danger")">
+                <tr class="@(rentalRequest.Paid == true ? "text-black" : "text-black")">
 
                     <td>@rentalRequest.Car.Model</td>
                     <td>@rentalRequest.Car.VehicleNo</td>

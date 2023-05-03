@@ -149,7 +149,7 @@
     }
     @if (car.IsAvailable && User.IsInRole("Customer"))
     {
-        <a asp-controller="RequestCar" asp-action="AddRequestCar" asp-route-id="@car.CarID" class="btn btn-warning">Rent</a>
+        <a asp-controller="RequestCar" asp-action="AddRequestCar" asp-route-id="@car.CarID" class="btn btn-dark">Rent</a>
     }
 </div>
 
