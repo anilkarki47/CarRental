@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "nPw1hvDy9fCM09NaQpxnF/Uu74/0eVyAtPREkBGCxm4=",
+  "Hash": "dSapTmQKOKLgTztoJbcpnZzdxykZHG29KGaB7bVZz9M=",
   "Source": "HajurKoCarRental",
   "BasePath": "_content/HajurKoCarRental",
   "Mode": "Default",
@@ -1103,6 +1103,23 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\Document-Photo\\55f2225f-5aa6-4756-bed0-4a24e5faf60a Anil Karki-Citizenship.png"
+    },
+    {
+      "Identity": "C:\\Users\\ASUS\\Desktop\\New folder\\New folder\\HajurKoCarRental\\wwwroot\\Document-Photo\\a47db248-a1ea-41a5-840a-bab561228721 Anil Karki-Citizenship.png",
+      "SourceId": "HajurKoCarRental",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\ASUS\\Desktop\\New folder\\New folder\\HajurKoCarRental\\wwwroot\\",
+      "BasePath": "_content/HajurKoCarRental",
+      "RelativePath": "Document-Photo/a47db248-a1ea-41a5-840a-bab561228721 Anil Karki-Citizenship.png",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\Document-Photo\\a47db248-a1ea-41a5-840a-bab561228721 Anil Karki-Citizenship.png"
     },
     {
       "Identity": "C:\\Users\\ASUS\\Desktop\\New folder\\New folder\\HajurKoCarRental\\wwwroot\\Document-Photo\\d4af1cfa-5185-49b9-8220-be030e43d143 Anil Karki-License.pdf",

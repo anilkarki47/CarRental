@@ -46,6 +46,8 @@ namespace HajurKoCarRental.Controllers
 
             return View(userFromDb);
         }
+
+
         //Post
         [HttpPost]
         public async Task<IActionResult> EditUserDetail(ApplicationUser user)
@@ -65,13 +67,11 @@ namespace HajurKoCarRental.Controllers
 
                 return RedirectToAction("Index");
             }
+
         //Post
         [HttpPost]
-
         public async Task<IActionResult> UpdatePassword(string userId, string newPassword, string confirmPassword)
         {
-
-
             var userFromDb = _db.ApplicationUsers.FirstOrDefault(u => u.Id == userId);
 
             if (userFromDb == null)
@@ -112,6 +112,7 @@ namespace HajurKoCarRental.Controllers
             return View(currentUser);
         }
 
+
         [HttpPost]
         public async Task<IActionResult> AddDocumentToDB(IFormFile DrivingLicense, IFormFile Citizenship)
         {
@@ -142,9 +143,5 @@ namespace HajurKoCarRental.Controllers
 
             return RedirectToAction("Index", "Car");
         }
-
-
-
-
     }
 }

@@ -31,9 +31,7 @@ namespace HajurKoCarRental.Controllers
         [Authorize(Roles = "Admin,Staff")]
         public async Task<ActionResult> CreateOffer()
         {
-            //var cars = await _db.Cars.Select(c => new { ID = c.CarID, Name = c.Model + "-" + c.Color }).ToListAsync();
-            //ViewBag.CarID = new SelectList(cars, "ID", "Name");
-            //return View();
+
             IEnumerable<Car> CarList = _db.Cars;
             return View(CarList);
         }
@@ -49,6 +47,7 @@ namespace HajurKoCarRental.Controllers
 
             // Check if there is an existing offer for the car with status true
             var existingOffer = await _db.Offers.FirstOrDefaultAsync(o => o.CarID == int.Parse(carId) && o.Status == true);
+
 
             // If there is an existing offer, update its status to false
             if (existingOffer != null)

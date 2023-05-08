@@ -5,8 +5,6 @@ using HajurKoCarRental.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using System.Security.Principal;
-using CloudinaryDotNet.Actions;
-using CloudinaryDotNet;
 using Microsoft.AspNetCore.Identity;
 
 namespace HajurKoCarRental.Controllers
@@ -22,6 +20,8 @@ namespace HajurKoCarRental.Controllers
             _db = db;
             _userManager = userManager;
         }
+
+
         public async Task<IActionResult> Index(string filter)
         {
             IEnumerable<Car> objCarList;
@@ -114,10 +114,6 @@ namespace HajurKoCarRental.Controllers
             await _db.SaveChangesAsync();
             return RedirectToAction("Index");
         }
-
-        //_db.Cars.Add(obj);
-        //_db.SaveChanges();
-        //return RedirectToAction("Index");
 
 
         public IActionResult Edit(int? id)

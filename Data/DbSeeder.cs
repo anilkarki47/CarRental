@@ -22,6 +22,8 @@ namespace HajurKoCarRental.Data
                 roleManager.CreateAsync(new IdentityRole(SD.Role_User_Staff)).GetAwaiter().GetResult();
                 roleManager.CreateAsync(new IdentityRole(SD.Role_User_Cust)).GetAwaiter().GetResult();
 
+                //for admin default login
+
                 var adminUserEmail = "admin@gmail.com";
                 var adminUser = await userManager.FindByEmailAsync(adminUserEmail);
                 if (adminUser == null)
@@ -43,6 +45,8 @@ namespace HajurKoCarRental.Data
 
                     await userManager.AddToRoleAsync(newAdminUser, SD.Role_User_Admin);
                 }
+
+                //for staff default login
 
                 var customerUserEmail = "staff@gmail.com";
                 var customerUser = await userManager.FindByEmailAsync(customerUserEmail);

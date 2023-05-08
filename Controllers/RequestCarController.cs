@@ -179,13 +179,6 @@ namespace HajurKoCarRental.Controllers
             _db.RentalRequests.Update(rentalRequest);
             await _db.SaveChangesAsync();
 
-            //var staffs = await _userManager.GetUsersInRoleAsync("Staff");
-            //foreach (var staff in staffs)
-            //{
-            //    var subject = "New Offer";
-            //    var message = "Dear staffs, A new request has been made.";
-            //    await _emailSender.SendEmailAsync(staff.Email, subject, message);
-            //}
             return RedirectToAction("Index", "RentalData");
         }
 
